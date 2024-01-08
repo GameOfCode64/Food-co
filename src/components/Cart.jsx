@@ -16,7 +16,7 @@ const Cart = () => {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(getTotals());
-  }, [quantity]);
+  }, [dispatch, quantity]);
   const handleRemoveFromCart = (cartItem) => {
     dispatch(removeFromCart(cartItem));
   };
