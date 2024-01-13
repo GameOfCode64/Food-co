@@ -54,10 +54,7 @@ const UserCart = () => {
             <div className="mt-4">
               <hr className="bg-[#ccc] h-[1px] mb-4 px-8" />
               {quantity.cartItems?.map((cartItem) => (
-                <div
-                  className="grid grid-cols-4 mt-4 overflow-x-scroll"
-                  key={cartItem.id}
-                >
+                <div className="grid grid-cols-4 mt-4" key={cartItem.id}>
                   <div className="md:gap-3 gap-2 w-full flex items-center justify-center">
                     <div className="md:w-[90px] w-[45px] h-[45px] md:h-[90px]">
                       <img
