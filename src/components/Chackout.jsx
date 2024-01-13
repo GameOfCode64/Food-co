@@ -16,6 +16,7 @@ import console from "console";
 import { useState } from "react";
 
 const Chackout = () => {
+  const [isLodding, setisLodding] = useState(false);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -40,6 +41,7 @@ const Chackout = () => {
   const storedCartData = JSON.parse(data);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setisLodding(true);
     try {
       const response = await axios.post(
         "https://wpl-backend-gold.vercel.app/cart",
@@ -49,7 +51,7 @@ const Chackout = () => {
           TabelNo,
         }
       );
-
+      setisLodding(false);
       localStorage.removeItem("cartItems");
       history("/order-sucess");
       window.location.reload();
@@ -92,13 +94,28 @@ const Chackout = () => {
                   />
                 </div>
                 <div className="w-full mt-4">
-                  <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="bg-[#f97162] w-full py-2 rounded-md text-white font-bold"
-                  >
-                    Order Now
-                  </button>
+                  {isLodding ? (
+                    <>
+                      <button
+                        disabled
+                        type="submit"
+                        onClick={handleSubmit}
+                        className="bg-[#f97162] w-full py-2 rounded-md text-white font-bold"
+                      >
+                        Order Now
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        type="submit"
+                        onClick={handleSubmit}
+                        className="bg-[#f97162] w-full py-2 rounded-md text-white font-bold"
+                      >
+                        Order Now
+                      </button>
+                    </>
+                  )}
                 </div>
               </form>
             </div>
